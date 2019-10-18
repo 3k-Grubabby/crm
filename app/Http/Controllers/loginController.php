@@ -40,4 +40,22 @@ class loginController extends Controller
     Auth::logout();
     return redirect('/login');
   }
+
+  public function loginAPI(Request $request)
+  {
+    // 数据验证
+    $validatedData = $request->validate([
+        'username' => 'required|max:32',
+        'password' => 'required',
+    ]);
+
+    //登陆验证
+    if($validatedData){
+        $credentials = $request->only('username', 'password');
+        if (Auth::attempt($credentials)) {
+            // 通过认证..
+            
+        }
+    }
+  }
 }
